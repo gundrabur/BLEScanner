@@ -11,6 +11,7 @@
 		96F75A092962D9EF00D36D9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F75A082962D9EF00D36D9F /* ContentView.swift */; };
 		96F75A0B2962D9F100D36D9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96F75A0A2962D9F100D36D9F /* Assets.xcassets */; };
 		96F75A0F2962D9F100D36D9F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96F75A0E2962D9F100D36D9F /* Preview Assets.xcassets */; };
+		96FF6D5E2965BF5E009BC20C /* BLEScannerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF6D5D2965BF5E009BC20C /* BLEScannerClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		96F75A0A2962D9F100D36D9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96F75A0C2962D9F100D36D9F /* BLEScanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BLEScanner.entitlements; sourceTree = "<group>"; };
 		96F75A0E2962D9F100D36D9F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		96FF6D5D2965BF5E009BC20C /* BLEScannerClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEScannerClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				96F75A062962D9EF00D36D9F /* BLEScannerApp.swift */,
+				96FF6D5D2965BF5E009BC20C /* BLEScannerClass.swift */,
 				96F75A082962D9EF00D36D9F /* ContentView.swift */,
 				96F75A0A2962D9F100D36D9F /* Assets.xcassets */,
 				96F75A0C2962D9F100D36D9F /* BLEScanner.entitlements */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96F75A092962D9EF00D36D9F /* ContentView.swift in Sources */,
+				96FF6D5E2965BF5E009BC20C /* BLEScannerClass.swift in Sources */,
 				96F75A072962D9EF00D36D9F /* BLEScannerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,7 +283,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -317,7 +321,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
