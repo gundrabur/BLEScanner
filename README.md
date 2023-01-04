@@ -1,4 +1,4 @@
-# Bluetooth Scanner App
+# Bluetooth Scanner App for iOS and macOS
 
 This app scans for nearby Bluetooth Low Energy (BLE) devices and displays them in a list. The list can be filtered by a search field, and the advertised data of each device is displayed in the list. The app also displays the RSSI (received signal strength indicator) value for each device, and the list can be sorted alphabetically by advertised data. The app has a button for starting or stopping the scan, and the scan can be stopped automatically after a certain time interval.
 
@@ -14,7 +14,8 @@ This app scans for nearby Bluetooth Low Energy (BLE) devices and displays them i
 
 # Requirements
 
-- iOS 13.0 or later
+- iOS 12.0 or later
+- macOS 13 or Later
 - Xcode 11 or later
 
 # Installation
