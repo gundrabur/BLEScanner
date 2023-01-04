@@ -4,18 +4,18 @@ This app scans for nearby Bluetooth Low Energy (BLE) devices and displays them i
 
 # Features
 
-Scan for nearby BLE devices
-Display discovered devices in a list
-Filter list by search field
-Display advertised data and RSSI value for each device
-Sort list alphabetically by advertised data
-Start and stop scan with a button
-Automatic stop of scan after a certain time interval
+-Scan for nearby BLE devices
+-Display discovered devices in a list
+-Filter list by search field
+-Display advertised data and RSSI value for each device
+-Sort list alphabetically by advertised data
+-Start and stop scan with a button
+-Automatic stop of scan after a certain time interval
 
 # Requirements
 
-iOS 13.0 or later
-Xcode 11 or later
+-iOS 13.0 or later
+- Xcode 11 or later
 
 # Installation
 
