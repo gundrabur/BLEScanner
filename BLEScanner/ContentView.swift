@@ -57,6 +57,7 @@ struct ContentView: View {
                     Text("Scan for Devices")
                 }
             }
+            // Button looks cooler this way on iOS
             .padding()
             .background(bluetoothScanner.isScanning ? Color.red : Color.blue)
             .foregroundColor(Color.white)
