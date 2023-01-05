@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		96EC7A282966FED200D07500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		96F75A032962D9EF00D36D9F /* BLEScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLEScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96F75A062962D9EF00D36D9F /* BLEScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEScannerApp.swift; sourceTree = "<group>"; };
 		96F75A082962D9EF00D36D9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		96F75A052962D9EF00D36D9F /* BLEScanner */ = {
 			isa = PBXGroup;
 			children = (
+				96EC7A282966FED200D07500 /* Info.plist */,
 				96F75A062962D9EF00D36D9F /* BLEScannerApp.swift */,
 				96FF6D5D2965BF5E009BC20C /* BLEScannerClass.swift */,
 				96F75A082962D9EF00D36D9F /* ContentView.swift */,
@@ -277,6 +279,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BLEScanner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Simple BLE Scanner";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Please allow Bluetooth, for this App is using Bluetooth to scan for nearby devices.";
@@ -318,6 +321,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BLEScanner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Simple BLE Scanner";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Please allow Bluetooth, for this App is using Bluetooth to scan for nearby devices.";
