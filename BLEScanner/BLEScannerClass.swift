@@ -82,9 +82,17 @@ class BluetoothScanner: NSObject, CBCentralManagerDelegate, ObservableObject {
     }
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        // Build a string representation of the advertised data
+        // Build a string representation of the advertised data and sort it by names
         var advertisedData = advertisementData.map { "\($0): \($1)" }.sorted(by: { $0 < $1 }).joined(separator: "\n")
-        advertisedData = "actual rssi: \(RSSI) dB\n" + advertisedData
+
+        // Convert the timestamp into human readable format and insert it to the advertisedData String
+        let timestampValue = advertisementData["kCBAdvDataTimestamp"] as! Double
+        // print(timestampValue)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        let dateString = dateFormatter.string(from: Date(timeIntervalSince1970: timestampValue))
+
+        advertisedData = "actual rssi: \(RSSI) dB\n" + "Timestamp: \(dateString)\n" + advertisedData
 
         // If the peripheral is not already in the list
         if !discoveredPeripheralSet.contains(peripheral) {
