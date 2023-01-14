@@ -22,6 +22,10 @@ This app scans for nearby Bluetooth Low Energy (BLE) devices and displays them i
 
 To install the app, clone or download the repository and open the .xcodeproj file in Xcode. Build and run the app on a device or simulator with iOS 13.0 or later.
 
+# Released in the Apple App Store
+Donwload it here:
+https://apps.apple.com/de/app/simple-ble-scanner/id1663446245?l=en 
+
 # Credits
 
 Developed by Christian Moeller, Jan 2023
