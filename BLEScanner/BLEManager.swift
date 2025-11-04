@@ -92,6 +92,14 @@ class BLEManager: NSObject {
         isAppInForeground = true
         shortcutManager.appDidEnterForeground()
 
+        // Update connection state in UserDefaults based on actual state
+        if connectionState == .connected, let deviceName = connectedPeripheral?.name {
+            UserDefaults.standard.set(true, forKey: "ESP32IsConnected")
+            UserDefaults.standard.set(deviceName, forKey: "ESP32DeviceName")
+        } else {
+            UserDefaults.standard.set(false, forKey: "ESP32IsConnected")
+        }
+
         // Reset reconnection attempts when app returns to foreground
         if isReconnecting && reconnectionAttempt >= BLEConfiguration.maxReconnectionAttempts {
             reconnectionAttempt = 0
@@ -334,17 +342,24 @@ extension BLEManager: CBCentralManagerDelegate {
 
         resetReconnectionState()
 
+        // Store connection state for App Intent
+        UserDefaults.standard.set(true, forKey: "ESP32IsConnected")
+        UserDefaults.standard.set(deviceName, forKey: "ESP32DeviceName")
+        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "ESP32LastConnectionTime")
+
         // Send notification
         notificationManager.sendConnectionNotification(deviceName: deviceName)
 
         // Discover services
         peripheral.discoverServices(nil)
 
-        // Trigger shortcut
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            guard let self = self else { return }
-            let result = self.shortcutManager.runShortcut()
-            self.statusMessage = result
+        // Trigger shortcut (only in foreground)
+        if isAppInForeground {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                guard let self = self else { return }
+                let result = self.shortcutManager.runShortcut()
+                self.statusMessage = result
+            }
         }
     }
 
@@ -360,6 +375,9 @@ extension BLEManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         connectionState = .disconnected
         connectedPeripheral = nil
+
+        // Update connection state for App Intent
+        UserDefaults.standard.set(false, forKey: "ESP32IsConnected")
 
         if let error = error {
             // Unexpected disconnection

@@ -67,19 +67,88 @@ struct AutomationGuideView: View {
                     GuideSection(
                         icon: "3.circle.fill",
                         iconColor: .blue,
-                        title: "Create Personal Automation"
+                        title: "Create Automation (Choose Best Option)"
+                    ) {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("⚠️ iOS doesn't support notification-based automation")
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.orange)
+
+                            Divider()
+
+                            Text("Option A: When App Opens")
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.blue)
+
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("1. Automation → + → App")
+                                Text("2. Select 'BLE Scanner'")
+                                Text("3. Choose 'Is Opened'")
+                                Text("4. Add: Check ESP32 Connection")
+                                Text("5. If true → Run your shortcut")
+                                Text("6. Turn OFF 'Ask Before Running'")
+                            }
+                            .font(.subheadline)
+
+                            Text("Best for: Checking status when you open the app")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+
+                            Divider()
+
+                            Text("Option B: When Bluetooth Turns On")
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.blue)
+
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("1. Automation → + → Bluetooth")
+                                Text("2. Select 'Is Connected' or 'Is Turned On'")
+                                Text("3. Add: Check ESP32 Connection")
+                                Text("4. If true → Run your shortcut")
+                                Text("5. Turn OFF 'Ask Before Running'")
+                            }
+                            .font(.subheadline)
+
+                            Text("Best for: Automatic when Bluetooth connects")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+
+                            Divider()
+
+                            Text("Option C: Location-Based (If Available)")
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.blue)
+
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("1. Automation → + → Arrive")
+                                Text("2. Set your location (home/work)")
+                                Text("3. Add: Check ESP32 Connection")
+                                Text("4. If true → Run your shortcut")
+                            }
+                            .font(.subheadline)
+
+                            Text("Best for: Arriving at specific location")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    // Alternative method
+                    GuideSection(
+                        icon: "lightbulb.fill",
+                        iconColor: .yellow,
+                        title: "Manual Trigger Alternative"
                     ) {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("1. Open Shortcuts → Automation tab")
-                            Text("2. Tap + → Create Personal Automation")
-                            Text("3. Select 'App'")
-                            Text("4. Choose 'BLE Scanner'")
-                            Text("5. Select 'Sends a Notification'")
-                            Text("6. Add action: 'Run Shortcut'")
-                            Text("7. Select your shortcut")
-                            Text("8. ⚠️ Turn OFF 'Ask Before Running'")
-                            Text("9. Tap Done")
-                                .fontWeight(.semibold)
+                            Text("If you don't want time-based polling:")
+                            Text("• Enable notifications in settings")
+                            Text("• When you get 'ESP32 Connected' notification")
+                            Text("• Tap it to open the app")
+                            Text("• Shortcut runs automatically in foreground")
+                                .padding(.top, 4)
+                            Text("This requires tapping the notification, but no polling.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
                     }
 

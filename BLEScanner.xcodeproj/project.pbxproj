@@ -16,6 +16,7 @@
 		9F7FD2182EB997FE000D24EF /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD2152EB997FE000D24EF /* ShortcutManager.swift */; };
 		9F7FD2192EB997FE000D24EF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD2132EB997FE000D24EF /* Models.swift */; };
 		9F7FD21D2EB999B6000D24EF /* AutomationGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD21C2EB999B6000D24EF /* AutomationGuideView.swift */; };
+		9F7FD2202EB9A7EB000D24EF /* CheckConnectionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD21F2EB9A7EB000D24EF /* CheckConnectionIntent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		9F7FD2142EB997FE000D24EF /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		9F7FD2152EB997FE000D24EF /* ShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
 		9F7FD21C2EB999B6000D24EF /* AutomationGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationGuideView.swift; sourceTree = "<group>"; };
+		9F7FD21F2EB9A7EB000D24EF /* CheckConnectionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckConnectionIntent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		96F75A052962D9EF00D36D9F /* BLEScanner */ = {
 			isa = PBXGroup;
 			children = (
+				9F7FD21F2EB9A7EB000D24EF /* CheckConnectionIntent.swift */,
 				96F75A062962D9EF00D36D9F /* BLEScannerApp.swift */,
 				96F75A082962D9EF00D36D9F /* ContentView.swift */,
 				9F7FD21C2EB999B6000D24EF /* AutomationGuideView.swift */,
@@ -162,6 +165,7 @@
 				9F7FD2182EB997FE000D24EF /* ShortcutManager.swift in Sources */,
 				9F7FD2192EB997FE000D24EF /* Models.swift in Sources */,
 				9F7FD21D2EB999B6000D24EF /* AutomationGuideView.swift in Sources */,
+				9F7FD2202EB9A7EB000D24EF /* CheckConnectionIntent.swift in Sources */,
 				96F75A072962D9EF00D36D9F /* BLEScannerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
