@@ -11,18 +11,26 @@
 		96F75A092962D9EF00D36D9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F75A082962D9EF00D36D9F /* ContentView.swift */; };
 		96F75A0B2962D9F100D36D9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96F75A0A2962D9F100D36D9F /* Assets.xcassets */; };
 		96F75A0F2962D9F100D36D9F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96F75A0E2962D9F100D36D9F /* Preview Assets.xcassets */; };
-		96FF6D5E2965BF5E009BC20C /* BLEScannerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF6D5D2965BF5E009BC20C /* BLEScannerClass.swift */; };
+		9F7FD2162EB997FE000D24EF /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD2122EB997FE000D24EF /* BLEManager.swift */; };
+		9F7FD2172EB997FE000D24EF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD2142EB997FE000D24EF /* NotificationManager.swift */; };
+		9F7FD2182EB997FE000D24EF /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD2152EB997FE000D24EF /* ShortcutManager.swift */; };
+		9F7FD2192EB997FE000D24EF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD2132EB997FE000D24EF /* Models.swift */; };
+		9F7FD21D2EB999B6000D24EF /* AutomationGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD21C2EB999B6000D24EF /* AutomationGuideView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		96EC7A282966FED200D07500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		96EC7A282966FED200D07500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96F75A032962D9EF00D36D9F /* BLEScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLEScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96F75A062962D9EF00D36D9F /* BLEScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEScannerApp.swift; sourceTree = "<group>"; };
 		96F75A082962D9EF00D36D9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		96F75A0A2962D9F100D36D9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96F75A0C2962D9F100D36D9F /* BLEScanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BLEScanner.entitlements; sourceTree = "<group>"; };
 		96F75A0E2962D9F100D36D9F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		96FF6D5D2965BF5E009BC20C /* BLEScannerClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEScannerClass.swift; sourceTree = "<group>"; };
+		9F7FD2122EB997FE000D24EF /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+		9F7FD2132EB997FE000D24EF /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		9F7FD2142EB997FE000D24EF /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		9F7FD2152EB997FE000D24EF /* ShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
+		9F7FD21C2EB999B6000D24EF /* AutomationGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationGuideView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +63,14 @@
 		96F75A052962D9EF00D36D9F /* BLEScanner */ = {
 			isa = PBXGroup;
 			children = (
-				96EC7A282966FED200D07500 /* Info.plist */,
 				96F75A062962D9EF00D36D9F /* BLEScannerApp.swift */,
-				96FF6D5D2965BF5E009BC20C /* BLEScannerClass.swift */,
 				96F75A082962D9EF00D36D9F /* ContentView.swift */,
+				9F7FD21C2EB999B6000D24EF /* AutomationGuideView.swift */,
+				9F7FD2122EB997FE000D24EF /* BLEManager.swift */,
+				9F7FD2152EB997FE000D24EF /* ShortcutManager.swift */,
+				9F7FD2142EB997FE000D24EF /* NotificationManager.swift */,
+				9F7FD2132EB997FE000D24EF /* Models.swift */,
+				96EC7A282966FED200D07500 /* Info.plist */,
 				96F75A0A2962D9F100D36D9F /* Assets.xcassets */,
 				96F75A0C2962D9F100D36D9F /* BLEScanner.entitlements */,
 				96F75A0D2962D9F100D36D9F /* Preview Content */,
@@ -145,7 +157,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				96F75A092962D9EF00D36D9F /* ContentView.swift in Sources */,
-				96FF6D5E2965BF5E009BC20C /* BLEScannerClass.swift in Sources */,
+				9F7FD2162EB997FE000D24EF /* BLEManager.swift in Sources */,
+				9F7FD2172EB997FE000D24EF /* NotificationManager.swift in Sources */,
+				9F7FD2182EB997FE000D24EF /* ShortcutManager.swift in Sources */,
+				9F7FD2192EB997FE000D24EF /* Models.swift in Sources */,
+				9F7FD21D2EB999B6000D24EF /* AutomationGuideView.swift in Sources */,
 				96F75A072962D9EF00D36D9F /* BLEScannerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

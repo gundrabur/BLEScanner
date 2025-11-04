@@ -8,16 +8,25 @@
 import SwiftUI
 import CoreBluetooth
 
-struct DiscoveredPeripheral {
-    var peripheral: CBPeripheral
-    var advertisedData: String
-}
-
 struct ContentView: View {
-    @State private var bluetoothManager = BluetoothManager()
+    @State private var notificationManager = NotificationManager()
+    @State private var shortcutManager = ShortcutManager()
+    @State private var bleManager: BLEManager
     @State private var searchText = ""
     @State private var showSettings = false
+    @State private var showAutomationGuide = false
     @Environment(\.scenePhase) var scenePhase
+
+    init() {
+        let notifManager = NotificationManager()
+        let shortManager = ShortcutManager()
+        _notificationManager = State(initialValue: notifManager)
+        _shortcutManager = State(initialValue: shortManager)
+        _bleManager = State(initialValue: BLEManager(
+            notificationManager: notifManager,
+            shortcutManager: shortManager
+        ))
+    }
 
     var body: some View {
         NavigationStack {
@@ -26,7 +35,7 @@ struct ContentView: View {
                 statusBar
 
                 // Reconnection warning banner
-                if bluetoothManager.isReconnecting {
+                if bleManager.isReconnecting {
                     reconnectionBanner
                 }
 
@@ -42,6 +51,14 @@ struct ContentView: View {
             .navigationTitle("BLE Scanner")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showAutomationGuide = true
+                    } label: {
+                        Image(systemName: "info.circle")
+                    }
+                }
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         showSettings = true
@@ -51,14 +68,21 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showSettings) {
-                SettingsView(bluetoothManager: bluetoothManager)
+                SettingsView(
+                    bleManager: bleManager,
+                    notificationManager: notificationManager,
+                    shortcutManager: shortcutManager
+                )
+            }
+            .sheet(isPresented: $showAutomationGuide) {
+                AutomationGuideView()
             }
             .onChange(of: scenePhase) { oldPhase, newPhase in
                 switch newPhase {
                 case .active:
-                    bluetoothManager.appDidEnterForeground()
+                    bleManager.appDidEnterForeground()
                 case .background:
-                    bluetoothManager.appDidEnterBackground()
+                    bleManager.appDidEnterBackground()
                 case .inactive:
                     break
                 @unknown default:
@@ -79,7 +103,7 @@ struct ContentView: View {
                     .font(.caption)
                     .fontWeight(.semibold)
 
-                Text("Attempt \(bluetoothManager.reconnectionAttempt) of 5")
+                Text("Attempt \(bleManager.reconnectionAttempt) of \(BLEConfiguration.maxReconnectionAttempts)")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
@@ -87,7 +111,7 @@ struct ContentView: View {
             Spacer()
 
             Button("Stop") {
-                bluetoothManager.stopReconnecting()
+                bleManager.stopReconnecting()
             }
             .buttonStyle(.bordered)
             .controlSize(.small)
@@ -104,14 +128,14 @@ struct ContentView: View {
                 .fill(connectionStatusColor)
                 .frame(width: 10, height: 10)
 
-            Text(bluetoothManager.statusMessage)
+            Text(bleManager.statusMessage)
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
             Spacer()
 
-            if bluetoothManager.connectionState == .connected,
-               let peripheral = bluetoothManager.connectedPeripheral {
+            if bleManager.connectionState == .connected,
+               let peripheral = bleManager.connectedPeripheral {
                 Text(peripheral.name ?? "Unknown")
                     .font(.caption)
                     .fontWeight(.semibold)
@@ -123,7 +147,7 @@ struct ContentView: View {
     }
 
     private var connectionStatusColor: Color {
-        switch bluetoothManager.connectionState {
+        switch bleManager.connectionState {
         case .disconnected:
             return .gray
         case .connecting, .disconnecting:
@@ -158,17 +182,17 @@ struct ContentView: View {
             DeviceRow(
                 peripheral: discoveredPeripheral.peripheral,
                 advertisedData: discoveredPeripheral.advertisedData,
-                isConnected: bluetoothManager.connectedPeripheral?.identifier == discoveredPeripheral.peripheral.identifier,
-                connectionState: bluetoothManager.connectionState,
+                isConnected: bleManager.connectedPeripheral?.identifier == discoveredPeripheral.peripheral.identifier,
+                connectionState: bleManager.connectionState,
                 onConnect: {
-                    bluetoothManager.connect(to: discoveredPeripheral.peripheral)
+                    bleManager.connect(to: discoveredPeripheral.peripheral)
                 },
                 onDisconnect: {
-                    bluetoothManager.disconnect()
+                    bleManager.disconnect()
                 },
                 onSetAutoConnect: {
-                    bluetoothManager.setAutoConnectDevice(discoveredPeripheral.peripheral)
-                    bluetoothManager.autoConnectEnabled = true
+                    bleManager.setAutoConnectDevice(discoveredPeripheral.peripheral)
+                    bleManager.autoConnectEnabled = true
                 }
             )
         }
@@ -177,9 +201,9 @@ struct ContentView: View {
 
     private var filteredPeripherals: [DiscoveredPeripheral] {
         if searchText.isEmpty {
-            return bluetoothManager.discoveredPeripherals
+            return bleManager.discoveredPeripherals
         }
-        return bluetoothManager.discoveredPeripherals.filter {
+        return bleManager.discoveredPeripherals.filter {
             $0.peripheral.name?.lowercased().contains(searchText.lowercased()) == true
         }
     }
@@ -187,9 +211,9 @@ struct ContentView: View {
     // MARK: - Bottom Controls
     private var bottomControls: some View {
         VStack(spacing: 12) {
-            if bluetoothManager.connectionState == .connected {
+            if bleManager.connectionState == .connected {
                 Button(action: {
-                    bluetoothManager.disconnect()
+                    bleManager.disconnect()
                 }) {
                     Text("Disconnect")
                         .frame(maxWidth: .infinity)
@@ -201,16 +225,16 @@ struct ContentView: View {
             }
 
             Button(action: {
-                if bluetoothManager.isScanning {
-                    bluetoothManager.stopScan()
+                if bleManager.isScanning {
+                    bleManager.stopScan()
                 } else {
-                    bluetoothManager.startScan()
+                    bleManager.startScan()
                 }
             }) {
-                Text(bluetoothManager.isScanning ? "Stop Scanning" : "Scan for Devices")
+                Text(bleManager.isScanning ? "Stop Scanning" : "Scan for Devices")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(bluetoothManager.isScanning ? Color.red : Color.blue)
+                    .background(bleManager.isScanning ? Color.red : Color.blue)
                     .foregroundStyle(.white)
                     .cornerRadius(10)
             }
@@ -302,48 +326,61 @@ struct DeviceRow: View {
 // MARK: - Settings View
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
-    var bluetoothManager: BluetoothManager
+    var bleManager: BLEManager
+    var notificationManager: NotificationManager
+    var shortcutManager: ShortcutManager
 
     var body: some View {
         NavigationStack {
             Form {
                 Section {
                     Toggle("Enable Auto-Connect", isOn: Binding(
-                        get: { bluetoothManager.autoConnectEnabled },
-                        set: { bluetoothManager.autoConnectEnabled = $0 }
+                        get: { bleManager.autoConnectEnabled },
+                        set: { bleManager.autoConnectEnabled = $0 }
                     ))
 
-                    if bluetoothManager.autoConnectEnabled {
+                    if bleManager.autoConnectEnabled {
                         Toggle("Background Reconnection", isOn: Binding(
-                            get: { bluetoothManager.allowBackgroundReconnection },
-                            set: { bluetoothManager.allowBackgroundReconnection = $0 }
+                            get: { bleManager.allowBackgroundReconnection },
+                            set: { bleManager.allowBackgroundReconnection = $0 }
                         ))
 
                         Button("Clear Auto-Connect Device") {
-                            bluetoothManager.clearAutoConnectDevice()
+                            bleManager.clearAutoConnectDevice()
                         }
                         .foregroundStyle(.red)
                     }
                 } header: {
                     Text("Auto-Connection")
                 } footer: {
-                    if bluetoothManager.autoConnectEnabled {
-                        Text("Auto-connect will attempt up to 5 reconnections. Background reconnection allows retries even when the app is in the background (uses more battery).")
+                    if bleManager.autoConnectEnabled {
+                        Text("Auto-connect will attempt up to \(BLEConfiguration.maxReconnectionAttempts) reconnections. Background reconnection allows retries even when the app is in the background (uses more battery).")
                     } else {
                         Text("When enabled, the app will automatically connect to your saved ESP32 device when it's discovered.")
                     }
                 }
 
                 Section {
+                    Toggle("Send Notifications", isOn: Binding(
+                        get: { notificationManager.notificationsEnabled },
+                        set: { notificationManager.notificationsEnabled = $0 }
+                    ))
+                } header: {
+                    Text("Notifications")
+                } footer: {
+                    Text("Receive notifications when your ESP32 connects. Use this with Shortcuts automation to trigger actions even when the app is in the background.")
+                }
+
+                Section {
                     TextField("Shortcut Name", text: Binding(
-                        get: { bluetoothManager.shortcutName },
-                        set: { bluetoothManager.shortcutName = $0 }
+                        get: { shortcutManager.shortcutName },
+                        set: { shortcutManager.shortcutName = $0 }
                     ))
                     .autocapitalization(.none)
                 } header: {
-                    Text("iOS Shortcuts")
+                    Text("iOS Shortcuts (Foreground Only)")
                 } footer: {
-                    Text("Enter the exact name of the Shortcut you want to run when your ESP32 connects. The shortcut will be triggered automatically after connection.")
+                    Text("This shortcut runs only when the app is in the foreground. For background automation, enable notifications above and create a Shortcuts automation triggered by the 'ESP32 Connected' notification.")
                 }
 
                 Section {
@@ -354,7 +391,7 @@ struct SettingsView: View {
                             .foregroundStyle(.secondary)
                     }
 
-                    if let peripheral = bluetoothManager.connectedPeripheral {
+                    if let peripheral = bleManager.connectedPeripheral {
                         HStack {
                             Text("Connected Device")
                             Spacer()
@@ -379,7 +416,7 @@ struct SettingsView: View {
     }
 
     private var connectionStateText: String {
-        switch bluetoothManager.connectionState {
+        switch bleManager.connectionState {
         case .disconnected: return "Disconnected"
         case .connecting: return "Connecting..."
         case .connected: return "Connected"
