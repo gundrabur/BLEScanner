@@ -1,36 +1,58 @@
-# Bluetooth Scanner App for iOS and macOS
+# Bluetooth Scanner App (iOS + macOS)
 
-This app scans for nearby Bluetooth Low Energy (BLE) devices and displays them in a list. The list can be filtered by a search field, and the advertised data of each device is displayed in the list. The app also displays the RSSI (received signal strength indicator) value for each device, and the timestamp of every lookup in human readable format. The app has a button for starting or stopping the scan. 
+This app scans for nearby Bluetooth Low Energy (BLE) devices and shows them in a readable, developer-friendly list UI. It’s a small SwiftUI + CoreBluetooth example project.
 
-# Features
+## Features
+
+Changelog: See [CHANGELOG.md](CHANGELOG.md).
 
 - Scan for nearby BLE devices
-- Display discovered devices in a list
-- Filter list by search field
-- Display advertised data and RSSI value for each device
-- Display Timestamp for each device
-- Sort advertised data alphabetically
-- Start and stop scan with a button
+- Search/filter by device name and manufacturer information
+- Signal strength UI: RSSI bars + dBm value
+- “Last seen” timestamp shown in relative format (e.g. “2s ago”)
+- Connectable badge (when reported by CoreBluetooth)
+- Expandable per-device “Details” section with:
+	- Manufacturer data (hex)
+	- Tx Power (if present)
+	- A readable advertisement-data dump
 
-# Requirements
+## UI stability while scanning
 
-- iOS 12.0 or later
-- macOS 13 or Later
-- Xcode 11 or later
+BLE discovery callbacks can arrive very frequently. To keep the list stable and reliably tappable (especially for expanding “Details”), the scanner throttles UI updates per device and only publishes updates when:
 
-# Installation
+- A minimum time interval has passed, or
+- A relevant value changed significantly (RSSI delta threshold, connectable state, manufacturer/txPower/name changes)
 
-To install the app, clone or download the repository and open the .xcodeproj file in Xcode. Build and run the app on a device or simulator with iOS 13.0 or later.
+## Requirements
 
-# Released in the Apple App Store
-Donwload it here:
-https://apps.apple.com/de/app/simple-ble-scanner/id1663446245?l=en 
+- iOS 15.6 or later
+- macOS 12.4 or later
+- Xcode 14 or later
 
-# Credits
+## Installation
+
+Clone or download the repository, open `BLEScanner.xcodeproj` in Xcode, then build and run on iOS (device/simulator) or macOS.
+
+## Bluetooth permissions
+
+iOS requires Bluetooth usage descriptions in the app’s Info.plist (permission prompt). In this project, they are provided via Xcode build settings (`INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription` and `INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription`).
+
+macOS builds typically require the App Sandbox + Bluetooth capability (configured via entitlements).
+
+## Released in the Apple App Store
+
+Download:
+https://apps.apple.com/de/app/simple-ble-scanner/id1663446245?l=en
+
+## Credits
 
 Developed by Christian Moeller, Jan 2023
 
-# License
+## Changelog
 
-This app is available under the MIT License. See the LICENSE file for more info.
+See [CHANGELOG.md](CHANGELOG.md).
+
+## License
+
+This app is available under the MIT License. See `LICENSE.md` for more info.
 
